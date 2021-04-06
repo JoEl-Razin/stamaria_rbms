@@ -9,3 +9,9 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+
+
+// Modules Installed:
+// Chakra-UI, Emotion, framer-motion
+// React-Icons - https://react-icons.github.io/react-icons
+//
