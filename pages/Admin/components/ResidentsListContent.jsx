@@ -22,8 +22,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
-import MoreOptionsList from '../components/MoreOptionsList'
-import AddProfile from '../components/AddProfile'
+import MoreOptionsList from '../../components/admin/MoreOptionsList'
+import AddProfile from '../../components/admin/AddProfile'
 
 import { AiOutlinePrinter, AiOutlineUserAdd } from 'react-icons/ai'
 

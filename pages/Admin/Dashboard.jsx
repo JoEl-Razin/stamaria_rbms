@@ -1,14 +1,16 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
-import { Center, Box, Flex, Heading, Tabs, TabList, TabPanels, TabPanel} from "@chakra-ui/react"
+import { Center, Box, Flex, Heading, Tabs, TabList, TabPanels, TabPanel, Tab } from "@chakra-ui/react"
 
 //imports
-import SideBarTab from './components/SideBarTab'
-import TopNavbar from './components/TopNavbar'
-import DashboardContent from './pages/DashboardContent'
-import BusinessEstListContent from './pages/BusinessEstListContent'
-import ResidentsListContent from './pages/ResidentsListContent'
+
+import TopNavbar from '../components/admin/TopNavbar'
+import Sidebar from '../components/admin/Sidebar'
+
+import DashboardContent from './components/DashboardContent'
+import BusinessEstListContent from './components/BusinessEstListContent'
+import ResidentsListContent from './components/ResidentsListContent'
 
 // icon imports
 import { RiDashboardLine, RiNewspaperLine } from 'react-icons/ri'
@@ -33,23 +35,38 @@ export default function Dashboard() {
             <Heading size='md'>Barangay</Heading>
             <Heading size='lg'>Sta. Maria</Heading>
           </Box>
-          <SideBarTab icon={<RiDashboardLine />} name='Dashboard' />
-          <SideBarTab icon={<BsFillPersonLinesFill />} name='Residents List' />
-          <SideBarTab icon={<HiOutlineHome />} name='Household List' />
-          <SideBarTab icon={<MdBusiness />} name='Business Establishments List' />
-          <SideBarTab icon={<RiNewspaperLine />} name='Certificates' />
-          <SideBarTab icon={<HiOutlineClipboardList />} name='System logs' />
-          <SideBarTab icon={<HiOutlineUserGroup />} name='Users' />
-          <SideBarTab icon={<MdHelpOutline />} name='Documentation/Help' />
-
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<RiDashboardLine />} name='Dashboard' />
+          </Tab>
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<BsFillPersonLinesFill />} name='Residents List' />
+          </Tab>
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<HiOutlineHome />} name='Household List' />
+          </Tab>
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<MdBusiness />} name='Business Establishments List' />
+          </Tab>
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<RiNewspaperLine />} name='Certificates' />
+          </Tab>
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<HiOutlineClipboardList />} name='System logs' />
+          </Tab>
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<HiOutlineUserGroup />} name='Users' />
+          </Tab>
+          <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
+            <Sidebar icon={<MdHelpOutline />} name='Documentation/Help' />
+          </Tab>
         </TabList>
 
         <Center >
-          <Box h='100vh' w='calc(100vw - 300px)'  p={4}>
+          <Box h='100vh' w='calc(100vw - 300px)' p={4}>
             <TopNavbar />
             <TabPanels>
               <TabPanel>
-                <DashboardContent />        
+                <DashboardContent />
               </TabPanel>
 
               <TabPanel>
@@ -57,7 +74,7 @@ export default function Dashboard() {
               </TabPanel>
 
               <TabPanel>
-                
+
               </TabPanel>
 
               <TabPanel>
@@ -75,7 +92,7 @@ export default function Dashboard() {
               <TabPanel>
                 Users
               </TabPanel>
-              
+
               <TabPanel>
                 Docu
               </TabPanel>

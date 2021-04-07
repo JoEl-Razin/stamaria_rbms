@@ -1,8 +1,5 @@
 import { Heading, Flex, Spacer, Box, Menu, MenuButton, MenuList, MenuItem, Button, Avatar, Divider } from '@chakra-ui/react'
 
-
-import { FiLogOut } from 'react-icons/fi'
-
 export default function TopNavbar() {
   return (
     <Flex>

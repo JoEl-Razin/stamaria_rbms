@@ -1,7 +1,7 @@
 
 import { Heading, Box, Divider, Flex } from '@chakra-ui/react'
 
-import DashboadTotalCard from '../components/DashboadTotalCard'
+import DashboadTotalCard from '../../components/admin/DashboadTotalCard'
 
 export default function DashboardContent() {
   return(

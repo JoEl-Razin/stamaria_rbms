@@ -13,8 +13,8 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 
-import TopNavigationBar from './components/TopNavigationBar'
-import AnnouncementCard from './components/AnnouncementCard'
+import TopNavigationBar from './components/landing/TopNavigationBar'
+import AnnouncementCard from './components//landing/AnnouncementCard'
 
 import { HiPhone, HiMail } from 'react-icons/hi'
 import { ImFacebook } from 'react-icons/im'
