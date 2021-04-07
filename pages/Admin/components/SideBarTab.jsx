@@ -1,5 +1,5 @@
 
-import { Button, Flex, Box, Heading, Tab } from '@chakra-ui/react'
+import { Flex, Box, Heading, Tab } from '@chakra-ui/react'
 
 
 export default function SideBarTab({ icon, name }) {
@@ -21,10 +21,7 @@ export default function SideBarTab({ icon, name }) {
         bgColor: 'gray.700'
       }}
       >
-      <Flex
-        w='100%'
-        alignItems='center'
-      >
+      <Flex w='100%' alignItems='center'>
         <Box px={2}>
           {icon}
         </Box>
