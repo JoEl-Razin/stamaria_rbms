@@ -26,7 +26,7 @@ export default function TopNavigationBar() {
         <Button variant='ghost' colorScheme='green'>Home</Button>
         <Button variant='ghost' colorScheme='green'>Announcements</Button>
         <Button variant='ghost' colorScheme='green'>About</Button>
-        <Button variant='ghost' colorScheme='green'>Search</Button>
+        <Button variant='ghost' colorScheme='green'>Residents Corner</Button>
         <Link href='/Admin'>
           <Button colorScheme='green'>
             <a>

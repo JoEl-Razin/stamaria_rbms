@@ -3,7 +3,7 @@ import { Heading, Box, Divider, Flex } from '@chakra-ui/react'
 
 import DashboadTotalCard from '../../components/admin/DashboadTotalCard'
 
-export default function DashboardContent() {
+export default function CertificateContent() {
   return(
     <Box>
       <Heading size='lg' mb={2}>Dashboard</Heading>

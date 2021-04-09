@@ -11,6 +11,9 @@ import Sidebar from '../components/admin/Sidebar'
 import DashboardContent from './components/DashboardContent'
 import BusinessEstListContent from './components/BusinessEstListContent'
 import ResidentsListContent from './components/ResidentsListContent'
+import HouseholdListContent from './components/HouseholdListContent'
+import CertificateContent from './components/CertificateContent'
+import UsersProfileCard from './components/UsersContent'
 
 // icon imports
 import { RiDashboardLine, RiNewspaperLine } from 'react-icons/ri'
@@ -66,23 +69,28 @@ export default function Dashboard() {
             <TopNavbar />
             <TabPanels>
               <TabPanel>
+                {/* DASHBOARD CONTENT */}
                 <DashboardContent />
               </TabPanel>
 
               <TabPanel>
+                {/* RESIDENTS LIST CONETNT */}
                 <ResidentsListContent />
               </TabPanel>
 
               <TabPanel>
-
+                {/* HOUSEHOLD LIST CONTENT */}
+                <HouseholdListContent />
               </TabPanel>
 
               <TabPanel>
+                {/* BUSINESS ESTABLISHMENT CONTENT */}
                 <BusinessEstListContent />
               </TabPanel>
 
               <TabPanel>
-                Cert
+                {/*  */}
+                <CertificateContent />
               </TabPanel>
 
               <TabPanel>
@@ -90,7 +98,7 @@ export default function Dashboard() {
               </TabPanel>
 
               <TabPanel>
-                Users
+                <UsersProfileCard/>
               </TabPanel>
 
               <TabPanel>
