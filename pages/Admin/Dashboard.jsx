@@ -1,7 +1,18 @@
+
 import Head from 'next/head'
 import Image from 'next/image'
 
-import { Center, Box, Flex, Heading, Tabs, TabList, TabPanels, TabPanel, Tab } from "@chakra-ui/react"
+import { 
+  Center, 
+  Box, 
+  Flex, 
+  Heading, 
+  Tabs, 
+  TabList, 
+  TabPanels, 
+  TabPanel, 
+  Tab 
+} from "@chakra-ui/react"
 
 //imports
 
@@ -16,12 +27,13 @@ import CertificateContent from './components/CertificateContent'
 import UsersProfileCard from './components/UsersContent'
 
 // icon imports
-import { RiDashboardLine, RiNewspaperLine } from 'react-icons/ri'
+import { RiDashboardLine, RiNewspaperLine, RiPagesLine } from 'react-icons/ri'
 import { HiOutlineHome, HiOutlineClipboardList, HiOutlineUserGroup } from 'react-icons/hi'
 import { MdBusiness, MdHelpOutline } from 'react-icons/md'
 import { BsFillPersonLinesFill } from 'react-icons/bs'
 
 export default function Dashboard() {
+
   return (
     <Flex bgColor='gray.50' h='100%' w='100%'>
       <Head>
@@ -54,13 +66,13 @@ export default function Dashboard() {
             <Sidebar icon={<RiNewspaperLine />} name='Certificates' />
           </Tab>
           <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
-            <Sidebar icon={<HiOutlineClipboardList />} name='System logs' />
+            <Sidebar icon={<HiOutlineClipboardList />} name='Transactions' />
           </Tab>
           <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
             <Sidebar icon={<HiOutlineUserGroup />} name='Users' />
           </Tab>
           <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
-            <Sidebar icon={<MdHelpOutline />} name='Documentation/Help' />
+            <Sidebar icon={<RiPagesLine />} name='Page Edit' />
           </Tab>
         </TabList>
 

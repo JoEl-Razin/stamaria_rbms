@@ -61,7 +61,7 @@ export default function AdminLogin() {
 
               <Center>
 
-                <Link href='/Admin/Dashboard' onClick={loginLoading}>
+                <Link href='/admin/dashboard' onClick={loginLoading}>
                   <Button
                     onClick={loginLoading}
                     isLoading={progress}

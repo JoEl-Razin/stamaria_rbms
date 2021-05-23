@@ -12,14 +12,14 @@ import {
   Td,
   Button,
   Spacer,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from '@chakra-ui/react'
 
 import MoreOptionsList from '../../components/admin/MoreOptionsList'
@@ -55,43 +55,41 @@ export default function DashboardContent() {
             <Td>Permanent</Td>
             <Td>Filipino</Td>
             <Td>
-              <MoreOptionsList text='Residents'/>
+              <MoreOptionsList text='Residents' />
             </Td>
           </Tr>
         </Tbody>
       </Table>
       <Flex>
-        <Button 
-          colorScheme='green' 
-          size='sm' 
-          my={2} 
-          mx={1} 
+        <Button
+          colorScheme='green'
+          size='sm'
+          my={2}
+          mx={1}
           leftIcon={<AiOutlineUserAdd />}
           ref={btnRef}
           onClick={onOpen}
-          >
-            Add
+        >
+          Add
           </Button>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-          >
-            <DrawerOverlay>
-              <DrawerContent>
-                <DrawerCloseButton/>
-                <DrawerHeader>Add Profile</DrawerHeader>
-                <DrawerBody>
-                  <AddProfile/>
-                </DrawerBody>
-                <DrawerFooter>
-                  <Button variant='outline' onClick={onClose}>Discard</Button>
-                  <Button colorScheme='blue'>Save</Button>
-                </DrawerFooter>
-              </DrawerContent>
-            </DrawerOverlay>
-          </Drawer>
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          scrollBehavior = 'inside'
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Add Profile</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <AddProfile/>
+            </ModalBody>
+            <ModalFooter>
+              <Button variant='outline' onClick={onClose}>Discard</Button>
+              <Button colorScheme='blue'>Save</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
         <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button>
       </Flex>
     </Box>

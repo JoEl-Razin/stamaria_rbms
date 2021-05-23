@@ -30,16 +30,9 @@ export default function Footer() {
         <Spacer />
 
         <Box px={10}>
-          <Heading size='sm' mb={2}>Links</Heading>
-          <Text><Button variant='link' color='gray.500'>Home</Button></Text>
-          <Text><Button variant='link' color='gray.500'>Announcments</Button></Text>
-          <Text><Button variant='link' color='gray.500'>About</Button></Text>
-        </Box>
-        <Box px={10}>
           <Heading size='sm' mb={2}>Residents Corner</Heading>
-          <Text><Button variant='link' color='gray.500'>Search Business</Button></Text>
-          <Text><Button variant='link' color='gray.500'>Search home rentals</Button></Text>
           <Text><Button variant='link' color='gray.500'>Request Certificate</Button></Text>
+          <Text><Button variant='link' color='gray.500'>Search Business Establishments</Button></Text>
         </Box>
         <Box px={10}>
           <Heading size='sm' mb={2}>Contacts</Heading>
@@ -56,15 +49,6 @@ export default function Footer() {
             <Heading mx={2} size='xs' color='gray.500'>fb.com/brgystamariazc</Heading>
           </Flex>
         </Box>
-        <Center px={10}>
-          <Link href='/Admin'>
-            <Button variant='link' color='gray.500'>
-              <a>
-                Admin login
-                </a>
-            </Button>
-          </Link>
-        </Center>
       </Flex>
     </Box>
   )
