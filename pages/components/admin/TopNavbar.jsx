@@ -1,6 +1,6 @@
 import { Heading, Flex, Spacer, Box, Menu, MenuButton, MenuList, MenuItem, Button, Avatar, Divider } from '@chakra-ui/react'
 
-export default function TopNavbar() {
+export default function TopNavbar({username}) {
   return (
     <Flex>
       <Box d='flex' alignItems='center'>
@@ -13,8 +13,8 @@ export default function TopNavbar() {
       <Box>
         <Menu>
           <MenuButton as={Button} alignItems='center'>
-            <Avatar size='xs' name='User name' src='brokenlink' mr={1} />
-            Username
+            <Avatar size='xs' name={username} src='brokenlink' mr={1} />
+            {username}
           </MenuButton>
           <MenuList>
             <MenuItem>Profile</MenuItem>

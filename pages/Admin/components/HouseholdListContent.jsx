@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Heading,
   Box,
@@ -22,15 +22,51 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
-import MoreOptionsList from '../../components/admin/MoreOptionsList'
+import MoreOptionRes from '../../components/admin/MoreOptionRes'
 import AddHousehold from '../../components/admin/AddHousehold'
 
 import { AiOutlinePrinter, AiOutlineUserAdd } from 'react-icons/ai'
 
+function TableBody({ households }) {
+  const rows = households.map((row, index) => {
+    return (
+      <Tr key={index}>
+        <Td>{row.householdNo}</Td>
+        <Td>{row.streetName}</Td>
+        <Td>{row.householdType}</Td>
+        <Td>{row.householdHead}</Td>
+        <Td><MoreOptionRes text='Household' /></Td>
+        
+      </Tr>
+    )
+  })
+
+  return (
+    <Tbody>
+      {rows}
+    </Tbody>
+  )
+}
 
 export default function HouseholdListContent() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+
+  const [households, setHouseholds] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/household', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          setHouseholds(result)
+        }
+      )
+  }, [])
 
   return (
     <Box>
@@ -43,20 +79,14 @@ export default function HouseholdListContent() {
         <Thead>
           <Tr>
             <Th>Household No.</Th>
-            <Th>Address</Th>
-            <Th>Family Head</Th>
+            <Th>Street Name</Th>
+            <Th>Household Type</Th>
+            <Th>Household Head</Th>
           </Tr>
         </Thead>
-        <Tbody>
-          <Tr>
-            <Td>000</Td>
-            <Td>Saavedra St.</Td>
-            <Td>Al Pedro Jon Kanalang</Td>
-            <Td>
-              <MoreOptionsList text='Household' />
-            </Td>
-          </Tr>
-        </Tbody>
+
+        <TableBody households={households} />
+
       </Table>
       <Flex>
         <Button

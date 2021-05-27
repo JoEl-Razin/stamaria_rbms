@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Heading,
   Box,
@@ -22,15 +22,54 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 
-import MoreOptionsList from '../../components/admin/MoreOptionsList'
+import MoreOptionRes from '../../components/admin/MoreOptionRes'
 import AddProfile from '../../components/admin/AddProfile'
 
 import { AiOutlinePrinter, AiOutlineUserAdd } from 'react-icons/ai'
+
+/* function TableBody({ residents }) {
+  const rows = residents.map((row, index) => {
+    return (
+      <Tr key={index}>
+        <Td>{row.name.firstName + ' ' + row.name.lastName}</Td>
+        <Td>{row.address.householdNo + ', ' + row.address.streetName}</Td>
+        <Td>{row.profession}</Td>
+        <Td>{row.nationality}</Td>
+        <Td><MoreOptionRes text='Resident' /></Td>
+
+      </Tr>
+    )
+  })
+
+  return (
+    <Tbody>
+      {rows}
+    </Tbody>
+  )
+}
+ */
+
 
 
 export default function DashboardContent() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+
+  var [residents, setResidents] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/resident', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          setResidents(result)
+        }
+      )
+  }, [])
 
   return (
     <Box>
@@ -44,21 +83,29 @@ export default function DashboardContent() {
           <Tr>
             <Th>Name</Th>
             <Th>Address</Th>
-            <Th>Resident Type</Th>
+            <Th>Profession</Th>
             <Th>Nationality</Th>
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>Al Pedro Jon Kanalang</Td>
-            <Td>Saavedra St.</Td>
-            <Td>Permanent</Td>
-            <Td>Filipino</Td>
-            <Td>
-              <MoreOptionsList text='Residents' />
-            </Td>
-          </Tr>
+          {
+            residents.map((row, index) => {
+              return (
+                <Tr key={row._id}>
+                  <Td>{row.name.firstName + ' ' + row.name.lastName}</Td>
+                  <Td>{row.address.householdNo + ' ' + row.address.streetName}</Td>
+                  <Td>{row.profession}</Td>
+                  <Td>{row.nationality}</Td>
+                  <Td><MoreOptionRes text='Resident' /></Td>
+                </Tr>
+              )
+            })
+          }
         </Tbody>
+
+
+        {/* <TableBody residents={residents} /> */}
+
       </Table>
       <Flex>
         <Button
@@ -75,19 +122,15 @@ export default function DashboardContent() {
         <Modal
           isOpen={isOpen}
           onClose={onClose}
-          scrollBehavior = 'inside'
+        // scrollBehavior='inside'
         >
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Add Profile</ModalHeader>
             <ModalCloseButton />
-            <ModalBody>
-              <AddProfile/>
-            </ModalBody>
-            <ModalFooter>
-              <Button variant='outline' onClick={onClose}>Discard</Button>
-              <Button colorScheme='blue'>Save</Button>
-            </ModalFooter>
+
+            <AddProfile onClick={onClose} />
+
           </ModalContent>
         </Modal>
         <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button>

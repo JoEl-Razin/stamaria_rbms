@@ -8,7 +8,7 @@ import {
 
 import { HiDotsHorizontal } from 'react-icons/hi'
 
-export default function MoreOptionsList( {text} ) {
+export default function MoreOptionRes( {text} ) {
   return(
     <Menu>
       <MenuButton 

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Heading,
   Box,
@@ -22,16 +22,52 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
-import MoreOptionsList from '../../components/admin/MoreOptionsList'
+import MoreOptionRes from '../../components/admin/MoreOptionRes'
 import AddProfile from '../../components/admin/AddProfile'
 
 import { AiOutlinePrinter } from 'react-icons/ai'
 import { MdAdd } from 'react-icons/md'
 
+function TableBody({ business }) {
+  const rows = business.map((row, index) => {
+    return (
+      <Tr key={index}>
+        <Td>{row.businessName}</Td>
+        <Td>{row.businessAddress}</Td>
+        <Td>{row.businessType}</Td>
+        <Td>{row.owner.name}</Td>
+        <Td><MoreOptionRes text='Resident'/></Td>
+        
+      </Tr>
+    )
+  })
+
+  return (
+    <Tbody>
+      {rows}
+    </Tbody>
+  )
+}
 
 export default function BusinessEstListContent() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+
+  const [business, setBusiness] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/business', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+    .then(
+      (result) => {
+        setBusiness(result)
+      }
+    )
+  }, [])
 
   return (
     <Box>
@@ -49,17 +85,7 @@ export default function BusinessEstListContent() {
             <Th>Owner</Th>
           </Tr>
         </Thead>
-        <Tbody>
-          <Tr>
-            <Td>Ceciles Pharmacy</Td>
-            <Td>Saavedra St.</Td>
-            <Td>Pharmacy & Grocery</Td>
-            <Td>Al Pedo Jan Kalang</Td>
-            <Td>
-              <MoreOptionsList text='Business'/>
-            </Td>
-          </Tr>
-        </Tbody>
+        <TableBody business={business} />
       </Table>
       <Flex>
         <Button 

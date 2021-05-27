@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import {
   Box,
@@ -21,20 +22,21 @@ export default function TopNavigationBar() {
     <Box
       pos='sticky'
       top='0'
-      zIndex='1'
+      zIndex='3'
     >
       <Flex alignItems='center' px={[100], [5]} py={5}>
-
         <Spacer />
-
         <Box>
           <Menu>
             <MenuButton as={Button} rightIcon={<BsChevronDown />}>
               Residents Corner
             </MenuButton>
             <MenuList>
-              <MenuItem>Request Certificate</MenuItem>
-              <MenuItem>Search Business Establishments</MenuItem>
+              <Link href='/request-certificate'>
+                <MenuItem>Request Certificate</MenuItem>
+              </Link>
+
+              <MenuItem >Search Business Establishments</MenuItem>
             </MenuList>
           </Menu>
         </Box>
