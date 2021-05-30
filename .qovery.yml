@@ -1,0 +1,15 @@
+---
+application:
+  name: "stamariazc"
+  project: "stamariazc"
+  organization: "QoveryCommunity"
+databases:
+- type: "MONGODB"
+  name: "stamariadb"
+  version: "4.4"
+routers:
+- name: "main-stamariazc"
+  routes:
+  - application_name: "stamariazc"
+    paths:
+    - "/*"
