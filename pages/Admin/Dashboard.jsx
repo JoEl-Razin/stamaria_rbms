@@ -11,7 +11,9 @@ import {
   TabList,
   TabPanels,
   TabPanel,
-  Tab
+  Tab,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react"
 
 //imports

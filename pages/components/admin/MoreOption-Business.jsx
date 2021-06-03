@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Menu,
   MenuButton,
@@ -10,11 +12,24 @@ import {
   ModalHeader,
   ModalCloseButton,
   useDisclosure,
+  Box,
+  Button,
+  ModalFooter,
+  ModalBody,
+  FormControl,
+  FormLabel,
+  Input,
+  RadioGroup,
+  HStack,
+  Radio,
+  Heading,
+  Flex,
+  Divider,
 } from '@chakra-ui/react'
 
 import { HiDotsHorizontal } from 'react-icons/hi'
 
-import ViewBusiness from './ViewBusiness'
+/* import ViewBusiness from './ViewBusiness' */
 
 export default function MoreOptionRes({
   url,
@@ -29,12 +44,53 @@ export default function MoreOptionRes({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const [businessName, setBusinessName] = useState(_businessName)
+  const [businessAddress, setBusinessAddress] = useState(_businessAddress)
+  const [businessType, setBusinessType] = useState(_businessType)
+  const [businessPermit, setBusinessPermit] = useState(_businessPermit)
+  const [owner, setOwner] = useState(_owner)
+  const [contactNo, setContactNo] = useState(_contactNo)
+  const [address, setAddress] = useState(_address)
+  const id = _id
+
+  function clearFields() {
+    setBusinessName('')
+    setBusinessAddress('')
+    setBusinessType('')
+    setBusinessPermit('')
+    setCivilStatus('')
+    setOwner('')
+    setContactNo('')
+    setAddress('')
+  }
+
   async function deleteData(url, id) {
     await fetch(`http://localhost:8080/${url}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },
+    })
+  }
+
+  async function updateProfile() {
+    const profile = JSON.stringify({
+      businessName,
+      businessAddress,
+      businessType,
+      businessPermit,
+      owner: {
+        name,
+        contactNo,
+        address
+      }
+    })
+    await fetch(`http://localhost:8080/business/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'applicaiton/json'
+      },
+      body: profile,
     })
   }
 
@@ -60,7 +116,38 @@ export default function MoreOptionRes({
         <ModalContent>
           <ModalHeader>View/Edit Profile</ModalHeader>
           <ModalCloseButton />
-          <ViewBusiness
+          <ModalBody>
+
+            <FormControl mt={2} isRequired Flex='1'>
+              <FormLabel>Business Name</FormLabel>
+              <Input placeholder="Business Name" value={businessName} onChange={(e) => setBusinessName(e.target.value)} />
+            </FormControl>
+
+            <FormControl mt={2} isRequired Flex='1'>
+              <FormLabel>Business Address</FormLabel>
+              <Input placeholder="Business Address" value={businessAddress} onChange={(e) => setBusinessAddress(e.target.value)} />
+            </FormControl>
+
+            <FormControl mt={2} isRequired Flex='1'>
+              <FormLabel>Business Type</FormLabel>
+              <Input placeholder="Business Type" value={businessType} onChange={(e) => setBusinessType(e.target.value)} />
+            </FormControl>
+
+            <FormControl mt={2} isRequired Flex='1'>
+              <FormLabel>Business Permit</FormLabel>
+              <Input placeholder="Business Permit" value={businessPermit} onChange={(e) => setBusinessPermit(e.target.value)} />
+            </FormControl>
+
+            <FormControl mt={2} isRequired Flex='1'>
+              <FormLabel>Owner</FormLabel>
+              <Input placeholder="Owner" value={owner} onChange={(e) => setOwner(e.target.value)} />
+            </FormControl>
+
+          </ModalBody>
+          <ModalFooter>
+            <Button mx={2} colorScheme='blue' onClick={updateProfile}>Update Profile</Button> {/* when clicked, turn into save button */}
+          </ModalFooter>
+          {/* <ViewBusiness
             _id={_id}
             _businessName={_businessName}
             _businessAddress={_businessAddress}
@@ -69,7 +156,7 @@ export default function MoreOptionRes({
             _owner={_owner}
             _contactNo={_contactNo}
             _address={_address}
-          />
+          /> */}
         </ModalContent>
 
       </Modal>

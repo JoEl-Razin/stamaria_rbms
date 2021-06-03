@@ -20,15 +20,28 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  FormControl,
+  FormLabel,
+  Input,
 } from '@chakra-ui/react'
 
 import MoreOptionRes from '../../components/admin/MoreOption-Business'
-import AddBusiness from '../../components/admin/AddBusiness'
+/* import AddBusiness from '../../components/admin/AddBusiness' */
+
+import addProfile from '../../api/admin/addBusiness'
 
 import { AiOutlinePrinter } from 'react-icons/ai'
 import { MdAdd } from 'react-icons/md'
 
 export default function BusinessEstListContent() {
+  const [businessName, setBusinessName] = useState()
+  const [businessAddress, setBusinessAddress] = useState()
+  const [businessType, setBusinessType] = useState()
+  const [businessPermit, setBusinessPermit] = useState()
+  const [name, setName] = useState()
+  const [contactNo, setContactNo] = useState()
+  const [address, setAddress] = useState()
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
@@ -47,6 +60,16 @@ export default function BusinessEstListContent() {
         }
       )
   }, [])
+
+  function clearFields() {
+    setBusinessName('')
+    setBusinessAddress('')
+    setBusinessType('')
+    setBusinessPermit('')
+    setName('')
+    setContactNo('')
+    setAddress('')
+  }
 
   return (
     <Box>
@@ -120,9 +143,57 @@ export default function BusinessEstListContent() {
         <ModalContent>
           <ModalHeader>Add Profile</ModalHeader>
           <ModalCloseButton />
+          <ModalBody >
+            <Flex>
+              <Box flex='1' mr={10}>
+                <Heading size='sm'>Business Details</Heading>
+                <FormControl mt={2} isRequired Flex='1'>
+                  <FormLabel>Business Name</FormLabel>
+                  <Input placeholder="Business Name" value={businessName} onChange={(e) => setBusinessName(e.target.value)} />
+                </FormControl>
 
-          <AddBusiness />
+                <FormControl mt={2} isRequired Flex='1'>
+                  <FormLabel>Business Address</FormLabel>
+                  <Input placeholder="Business Address" value={businessAddress} onChange={(e) => setBusinessAddress(e.target.value)} />
+                </FormControl>
 
+                <FormControl mt={2} isRequired Flex='1'>
+                  <FormLabel>Business Type</FormLabel>
+                  <Input placeholder="Business Type" value={businessType} onChange={(e) => setBusinessType(e.target.value)} />
+                </FormControl>
+
+                <FormControl mt={2} isRequired Flex='1'>
+                  <FormLabel>Business Permit</FormLabel>
+                  <Input placeholder="Business Permit" value={businessPermit} onChange={(e) => setBusinessPermit(e.target.value)} />
+                </FormControl>
+              </Box>
+
+              <Box flex='1'>
+                <Heading size='sm'>Owner Details</Heading>
+                <FormControl mt={2} isRequired Flex='1'>
+                  <FormLabel>Owner Name</FormLabel>
+                  <Input placeholder="Owner Name" value={name} onChange={(e) => setName(e.target.value)} />
+                </FormControl>
+
+                <FormControl mt={2} isRequired Flex='1'>
+                  <FormLabel>Owner Contact No</FormLabel>
+                  <Input placeholder="Owner" value={contactNo} onChange={(e) => setContactNo(e.target.value)} />
+                </FormControl>
+
+                <FormControl mt={2} isRequired Flex='1'>
+                  <FormLabel>Owner Address</FormLabel>
+                  <Input placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+                </FormControl>
+              </Box>
+            </Flex>
+
+          </ModalBody>
+          <ModalFooter>
+            <Button mx={2} colorScheme='green' onClick={clearFields}>Clear Fields</Button>
+            <Button mx={2} colorScheme='blue' onClick={addProfile({ businessName, businessAddress, businessType, businessPermit, name, contactNo, address })}>Save</Button>
+          </ModalFooter>
+
+          {/* <AddBusiness /> */}
         </ModalContent>
       </Modal>
     </Box>
