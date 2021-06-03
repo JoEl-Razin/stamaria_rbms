@@ -1,44 +1,60 @@
 import React, { useState, useEffect } from 'react'
 import {
+  Box,
+  Button,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
   FormControl,
   FormLabel,
   Input,
   RadioGroup,
   HStack,
   Radio,
-  Box,
-  ModalFooter,
-  ModalBody,
-  Button,
   Heading,
   Flex,
   Divider,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
 } from '@chakra-ui/react'
 
-export default function AddProfile() {
+// import ViewResident from '../../api/admin/resident/resident-view-one'
 
-  const [firstName, setFirstName] = useState('')
-  const [middleInitial, setMiddleInitial] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [sex, setSex] = useState('')
-  const [civilStatus, setCivilStatus] = useState('')
-  const [religion, setReligion] = useState('')
-  const [householdNo, setHouseholdNo] = useState('')
-  const [streetName, setStreetName] = useState('')
-  const [precintNumber, setPrecintNumber] = useState('')
-  const [birthday, setBirthday] = useState('')
-  const [nationality, setNationality] = useState('')
-  const [profession, setProfession] = useState('')
-  const [birthplace, setBirthplace] = useState('')
-  const [residentType, setResidentType] = useState('Non-Voter')
-  const [blacklisted, setBlacklisted] = useState('false')
-  const [details, setDetails] = useState('')
-  const [invalidMessage, setInvalidMessage] = useState('')
+export default function view({
+  _id,
+  _firstName,
+  _middleInitial,
+  _lastName,
+  _sex,
+  _civilStatus,
+  _religion,
+  _householdNo,
+  _streetName,
+  _precintNumber,
+  _birthday,
+  _birthplace,
+  _profession,
+  _nationality,
+  _residentType,
+  _blacklisted,
+  _details,
+}) {
 
+  const [firstName, setFirstName] = useState(_firstName)
+  const [middleInitial, setMiddleInitial] = useState(_middleInitial)
+  const [lastName, setLastName] = useState(_lastName)
+  const [sex, setSex] = useState(_sex)
+  const [civilStatus, setCivilStatus] = useState(_civilStatus)
+  const [religion, setReligion] = useState(_religion)
+  const [householdNo, setHouseholdNo] = useState(_householdNo)
+  const [streetName, setStreetName] = useState(_streetName)
+  const [precintNumber, setPrecintNumber] = useState(_precintNumber)
+  const [birthday, setBirthday] = useState(_birthday)
+  const [nationality, setNationality] = useState(_nationality)
+  const [profession, setProfession] = useState(_profession)
+  const [birthPlace, setBirthPlace] = useState(_birthplace)
+  const [residentType, setResidentType] = useState(_residentType)
+  const [blacklisted, setBlacklisted] = useState(_blacklisted)
+  const [details, setDetails] = useState(_details)
+  const id = _id
 
   function clearFields() {
     setFirstName('')
@@ -53,48 +69,43 @@ export default function AddProfile() {
     setBirthday('')
     setNationality('')
     setProfession('')
-    setBirthplace('')
-    setBlacklisted('false')
+    setBirthPlace('')
+    setBlacklisted(false)
     setDetails('')
     setResidentType('Non-Voter')
   }
 
-  async function addProfile() {
-
-    const credentials = JSON.stringify({
+  async function updateProfile(){
+    const profile = JSON.stringify({
       name: {
         firstName,
         middleInitial,
         lastName,
       },
+      sex,
       civilStatus,
       religion,
-      sex,
       address: {
         householdNo,
         streetName,
       },
       precintNumber,
       birthday,
-      civilStatus,
       nationality,
       profession,
-      birthplace,
-      residentType,
+      birthPlace,
       blacklist: {
         blacklisted,
         details,
-      }
-    })
-
-    const response = await fetch('http://localhost:8080/resident', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
       },
-      body: credentials,
-    }).then((res) => res.json())
-
+    })
+    await fetch(`http://localhost:8080/resident/${id}`,{
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'applicaiton/json'
+      },
+      body: profile,
+    })
   }
 
   let type;
@@ -116,6 +127,7 @@ export default function AddProfile() {
   } else {
     blacklistForm = <> </>
   }
+
 
   return (
     <Box>
@@ -142,7 +154,7 @@ export default function AddProfile() {
             </Flex>
 
             <Box>
-              <Heading mt={5} size='sm'>Address</Heading>
+              <Heading pt={2} size='sm'>Address</Heading>
               <FormControl m={2} isRequired>
                 <FormLabel>House Number</FormLabel>
                 <Input placeholder="House Number" value={householdNo} onChange={(e) => setHouseholdNo(e.target.value)} />
@@ -161,7 +173,6 @@ export default function AddProfile() {
                     <Radio value='Non-Voter'>Non-Voter</Radio>
                   </HStack>
                 </RadioGroup>
-
                 {type}
               </FormControl>
             </Box>
@@ -170,7 +181,7 @@ export default function AddProfile() {
           <Divider orientation='vertical' />
 
           <Box flex='1'>
-            <Heading size='sm'>Personal Information</Heading>
+            <Heading size='sm'>Personal Informations</Heading>
             <Flex>
               <FormControl m={2} isRequired>
                 <FormLabel>Sex</FormLabel>
@@ -207,16 +218,16 @@ export default function AddProfile() {
 
             <FormControl m={2} isRequired>
               <FormLabel>Birth place</FormLabel>
-              <Input placeholder="Brith Place" value={birthplace} onChange={(e) => setBirthplace(e.target.value)} />
+              <Input placeholder="Brith Place" value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} />
             </FormControl>
 
             <FormControl m={2} isRequired>
               <FormLabel>Profession</FormLabel>
               <Input placeholder="Profession" value={profession} onChange={(e) => setProfession(e.target.value)} />
             </FormControl>
+
           </Box>
         </Flex>
-
         <FormControl mr={10} m={2} isRequired>
           <FormLabel>Blacklist</FormLabel>
           <RadioGroup value={blacklisted} onChange={setBlacklisted}>
@@ -227,12 +238,9 @@ export default function AddProfile() {
           </RadioGroup>
           {blacklistForm}
         </FormControl>
-
       </ModalBody>
-
       <ModalFooter>
-        <Button mx={2} colorScheme='green' onClick={clearFields}>Clear Fields</Button>
-        <Button mx={2} colorScheme='blue' onClick={addProfile}>Save</Button>
+        <Button mx={2} colorScheme='blue' onClick={updateProfile}>Update Profile</Button> {/* when clicked, turn into save button */}
       </ModalFooter>
     </Box>
   )

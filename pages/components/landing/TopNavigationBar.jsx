@@ -36,7 +36,6 @@ export default function TopNavigationBar() {
                 <MenuItem>Request Certificate</MenuItem>
               </Link>
 
-              <MenuItem >Search Business Establishments</MenuItem>
             </MenuList>
           </Menu>
         </Box>

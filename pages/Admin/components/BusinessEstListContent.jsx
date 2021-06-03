@@ -12,42 +12,21 @@ import {
   Td,
   Button,
   Spacer,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   useDisclosure,
 } from '@chakra-ui/react'
 
-import MoreOptionRes from '../../components/admin/MoreOptionRes'
-import AddProfile from '../../components/admin/AddProfile'
+import MoreOptionRes from '../../components/admin/MoreOption-Business'
+import AddBusiness from '../../components/admin/AddBusiness'
 
 import { AiOutlinePrinter } from 'react-icons/ai'
 import { MdAdd } from 'react-icons/md'
-
-function TableBody({ business }) {
-  const rows = business.map((row, index) => {
-    return (
-      <Tr key={index}>
-        <Td>{row.businessName}</Td>
-        <Td>{row.businessAddress}</Td>
-        <Td>{row.businessType}</Td>
-        <Td>{row.owner.name}</Td>
-        <Td><MoreOptionRes text='Resident'/></Td>
-        
-      </Tr>
-    )
-  })
-
-  return (
-    <Tbody>
-      {rows}
-    </Tbody>
-  )
-}
 
 export default function BusinessEstListContent() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -62,17 +41,31 @@ export default function BusinessEstListContent() {
         'Content-Type': 'application/json'
       },
     }).then(res => res.json())
-    .then(
-      (result) => {
-        setBusiness(result)
-      }
-    )
+      .then(
+        (result) => {
+          setBusiness(result)
+        }
+      )
   }, [])
 
   return (
     <Box>
-      <Heading size='lg' mb={2}>Business Establishment List</Heading>
-      <Spacer />
+      <Flex>
+        <Heading size='lg' mb={2}>Business Establishment List</Heading>
+        <Spacer />
+        <Button
+          colorScheme='green'
+          size='sm'
+          my={2}
+          mx={1}
+          leftIcon={<MdAdd />}
+          ref={btnRef}
+          onClick={onOpen}
+        >
+          Add Business Est
+          </Button>
+      </Flex>
+
 
       <Divider my={3} />
 
@@ -85,42 +78,53 @@ export default function BusinessEstListContent() {
             <Th>Owner</Th>
           </Tr>
         </Thead>
-        <TableBody business={business} />
+        <Tbody>
+          {
+            business.map((row) => {
+              return (
+                <Tr key={row._id}>
+                  <Td>{row.businessName}</Td>
+                  <Td>{row.businessAddress}</Td>
+                  <Td>{row.businessType}</Td>
+                  <Td>{row.owner.name}</Td>
+                  <Td>
+                    <MoreOptionRes
+                      url='business'
+                      _id={row._id}
+                      _businessName={row.businessName}
+                      _businessAddress={row.businessAddress}
+                      _businessType={row.businessType}
+                      _businessPermit={row.businessPermit}
+                      _owner={row.owner.name}
+                      _contactNo={row.owner.contactNo}
+                      _address={row.owner.address}
+                    />
+                  </Td>
+                </Tr>
+              )
+            })
+          }
+        </Tbody>
       </Table>
       <Flex>
-        <Button 
-          colorScheme='green' 
-          size='sm' 
-          my={2} 
-          mx={1} 
-          leftIcon={<MdAdd />}
-          ref={btnRef}
-          onClick={onOpen}
-          >
-            Add
-          </Button>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-          >
-            <DrawerOverlay>
-              <DrawerContent>
-                <DrawerCloseButton/>
-                <DrawerHeader>Add Profile</DrawerHeader>
-                <DrawerBody>
-                  <AddProfile/>
-                </DrawerBody>
-                <DrawerFooter>
-                  <Button variant='outline' onClick={onClose}>Discard</Button>
-                  <Button colorScheme='blue'>Save</Button>
-                </DrawerFooter>
-              </DrawerContent>
-            </DrawerOverlay>
-          </Drawer>
-        <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button>
+
+
+        {/* <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button> */}
       </Flex>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size='4xl'
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add Profile</ModalHeader>
+          <ModalCloseButton />
+
+          <AddBusiness />
+
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }

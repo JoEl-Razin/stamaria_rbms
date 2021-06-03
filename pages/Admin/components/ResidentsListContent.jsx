@@ -22,7 +22,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 
-import MoreOptionRes from '../../components/admin/MoreOptionRes'
+import MoreOptionRes from '../../components/admin/MoreOption-Profile'
 import AddProfile from '../../components/admin/AddProfile'
 
 import { AiOutlinePrinter, AiOutlineUserAdd } from 'react-icons/ai'
@@ -49,9 +49,7 @@ import { AiOutlinePrinter, AiOutlineUserAdd } from 'react-icons/ai'
 }
  */
 
-
-
-export default function DashboardContent() {
+export default function DashboardContent({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
@@ -73,8 +71,22 @@ export default function DashboardContent() {
 
   return (
     <Box>
-      <Heading size='lg' mb={2}>Residents List</Heading>
-      <Spacer />
+      <Flex>
+        <Heading size='lg' mb={2}>Residents List</Heading>
+        <Spacer />
+        <Button
+          colorScheme='green'
+          size='sm'
+          my={2}
+          mx={1}
+          leftIcon={<AiOutlineUserAdd />}
+          ref={btnRef}
+          onClick={onOpen}
+        >
+          Add Resident
+          </Button>
+      </Flex>
+
 
       <Divider my={3} />
 
@@ -89,52 +101,61 @@ export default function DashboardContent() {
         </Thead>
         <Tbody>
           {
-            residents.map((row, index) => {
+            residents.map((row) => {
               return (
                 <Tr key={row._id}>
                   <Td>{row.name.firstName + ' ' + row.name.lastName}</Td>
                   <Td>{row.address.householdNo + ' ' + row.address.streetName}</Td>
                   <Td>{row.profession}</Td>
                   <Td>{row.nationality}</Td>
-                  <Td><MoreOptionRes text='Resident' /></Td>
+                  <Td>
+                    <MoreOptionRes
+                      url='resident'
+                      _id={row._id}
+                      _firstName={row.name.firstName}
+                      _middleInitial={row.name.middleInitial}
+                      _lastName={row.name.lastName}
+                      _sex={row.sex}
+                      _civilStatus={row.civilStatus}
+                      _religion={row.religion}
+                      _householdNo={row.address.householdNo}
+                      _streetName={row.address.streetName}
+                      _precintNumber={row.precintNumber}
+                      _birthday={row.birthday}
+                      _birthplace={row.birthplace}
+                      _profession={row.profession}
+                      _nationality={row.nationality}
+                      _residentType={row.residentType}
+                      _blacklisted={row.blacklist.blacklisted}
+                      _details={row.blacklist.details}
+                    />
+                  </Td>
                 </Tr>
               )
             })
           }
         </Tbody>
 
-
-        {/* <TableBody residents={residents} /> */}
-
       </Table>
       <Flex>
-        <Button
-          colorScheme='green'
-          size='sm'
-          my={2}
-          mx={1}
-          leftIcon={<AiOutlineUserAdd />}
-          ref={btnRef}
-          onClick={onOpen}
-        >
-          Add
-          </Button>
-        <Modal
-          isOpen={isOpen}
-          onClose={onClose}
-        // scrollBehavior='inside'
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Add Profile</ModalHeader>
-            <ModalCloseButton />
 
-            <AddProfile onClick={onClose} />
 
-          </ModalContent>
-        </Modal>
-        <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button>
+        {/* <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button> */}
       </Flex>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size='4xl'
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add Profile</ModalHeader>
+          <ModalCloseButton />
+
+          <AddProfile />
+
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }

@@ -22,31 +22,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 
-import MoreOptionRes from '../../components/admin/MoreOptionRes'
+import MoreOptionRes from '../../components/admin/MoreOption-Household'
 import AddHousehold from '../../components/admin/AddHousehold'
 
 import { AiOutlinePrinter, AiOutlineUserAdd } from 'react-icons/ai'
-
-function TableBody({ households }) {
-  const rows = households.map((row, index) => {
-    return (
-      <Tr key={index}>
-        <Td>{row.householdNo}</Td>
-        <Td>{row.streetName}</Td>
-        <Td>{row.householdType}</Td>
-        <Td>{row.householdHead}</Td>
-        <Td><MoreOptionRes text='Household' /></Td>
-        
-      </Tr>
-    )
-  })
-
-  return (
-    <Tbody>
-      {rows}
-    </Tbody>
-  )
-}
 
 export default function HouseholdListContent() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -70,8 +49,22 @@ export default function HouseholdListContent() {
 
   return (
     <Box>
-      <Heading size='lg' mb={2}>Household List</Heading>
-      <Spacer />
+      <Flex>
+        <Heading size='lg' mb={2}>Household List</Heading>
+        <Spacer />
+        <Button
+          colorScheme='green'
+          size='sm'
+          my={2}
+          mx={1}
+          leftIcon={<AiOutlineUserAdd />}
+          ref={btnRef}
+          onClick={onOpen}
+        >
+          Add Household
+          </Button>
+      </Flex>
+
 
       <Divider my={3} />
 
@@ -84,42 +77,50 @@ export default function HouseholdListContent() {
             <Th>Household Head</Th>
           </Tr>
         </Thead>
-
-        <TableBody households={households} />
+        <Tbody>
+          {
+            households.map((row) => {
+              return (
+                <Tr key={row._id}>
+                  <Td>{row.householdNo}</Td>
+                  <Td>{row.streetName}</Td>
+                  <Td>{row.householdType}</Td>
+                  <Td>{row.householdHead}</Td>
+                  <Td><MoreOptionRes
+                    url='household'
+                    id={row._id}
+                    _householdNo={row.householdNo}
+                    _streetName={row.streetName}
+                    _householdType={row.householdType}
+                    _householdHead={row.householdHead}
+                    _householdMember={row.householdMember}
+                  /></Td>
+                </Tr>
+              )
+            })
+          }
+        </Tbody>
 
       </Table>
       <Flex>
-        <Button
-          colorScheme='green'
-          size='sm'
-          my={2}
-          mx={1}
-          leftIcon={<AiOutlineUserAdd />}
-          ref={btnRef}
-          onClick={onOpen}
-        >
-          Add
-          </Button>
-        <Modal
-          isOpen={isOpen}
-          onClose={onClose}
-          scrollBehavior='inside'
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Add Profile</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <AddHousehold />
-            </ModalBody>
-            <ModalFooter>
-              <Button variant='outline' onClick={onClose}>Discard</Button>
-              <Button colorScheme='blue'>Save</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-        <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button>
+
+
+        {/* <Button colorScheme='teal' size='sm' my={2} mx={1} leftIcon={<AiOutlinePrinter />}>Print List</Button> */}
       </Flex>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size='4xl'
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add Profile</ModalHeader>
+          <ModalCloseButton />
+
+          <AddHousehold />
+
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }

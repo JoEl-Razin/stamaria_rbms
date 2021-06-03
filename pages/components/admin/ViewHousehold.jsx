@@ -1,52 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
+  Box,
+  Button,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
   FormControl,
   FormLabel,
   Input,
   RadioGroup,
   HStack,
   Radio,
-  Box,
+  Heading,
   Flex,
-  ModalBody,
-  ModalFooter,
-  Button,
+  Divider,
 } from '@chakra-ui/react'
 
+// import ViewResident from '../../api/admin/resident/resident-view-one'
 
-export default function AddHousehold() {
-  const [householdNo, setHouseholdNo] = useState()
-  const [streetName, setStreetName] = useState()
-  const [householdType, setHouseholdType] = useState()
-  const [householdHead, setHouseholdHead] = useState()
-  const [householdMembers, setHouseholdMembers] = useState([])
+export default function view({
+  _id,
+  _householdNo,
+  _streetName,
+  _householdType,
+  _householdHead,
+  _householdMember,
+}) {
 
+  const [householdNo, setHouseholdNo] = useState(_householdNo)
+  const [streetName, setStreetName] = useState(_streetName)
+  const [householdType, setHouseholdType] = useState(_householdType)
+  const [householdHead, setHouseholdHead] = useState(_householdHead)
+  const [householdMember, setHouseholdMember] = useState(_householdMember)
+  const id = _id
 
   function clearFields() {
-    setHouseholdNo()
-    setStreetName()
-    setHouseholdType()
-    setHouseholdHead()
-    setHouseholdMembers()
+    setHouseholdNo('')
+    setStreetname('')
+    setHouseholdType('')
+    setHouseholdHead('')
+    setHouseholdMember('')
   }
 
-  async function addProfile() {
-
-    const credentials = JSON.stringify({
+  async function updateProfile(){
+    const profile = JSON.stringify({
       householdNo,
       streetName,
       householdType,
       householdHead,
-      householdMembers,
+      householdMember,
     })
-
-    const response = await fetch('http://localhost:8080/household', {
-      method: 'POST',
+    await fetch(`http://localhost:8080/household/${id}`,{
+      method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'applicaiton/json'
       },
-      body: credentials,
-    }).then((res) => res.json())
+      body: profile,
+    })
   }
 
   let type;
@@ -56,7 +66,7 @@ export default function AddHousehold() {
   else if (householdType == 'Couple') {
     type = <FormControl mt={2} isRequired Flex='1'>
       <FormLabel>Household Member</FormLabel>
-      <Input placeholder="Household Member" value={householdMembers} onChange={(e) => setHouseholdMembers(e.target.value)} />
+      <Input placeholder="Household Member" value={householdMember} onChange={(e) => setHouseholdMembers(e.target.value)} />
     </FormControl>
   }
   else if (householdType == 'Couple w/ childrens') {
@@ -66,11 +76,12 @@ export default function AddHousehold() {
 
   }
   else if (householdType == 'Rental') {
-    
+
   }
   else {
 
   }
+
 
   return (
     <Box>
@@ -108,11 +119,9 @@ export default function AddHousehold() {
 
       </ModalBody>
       <ModalFooter>
-        <Button mx={2} colorScheme='green' onClick={clearFields}>Clear Fields</Button>
-        <Button mx={2} colorScheme='blue' onClick={addProfile}>Save</Button>
+      <Button mx={2} colorScheme='blue' onClick={updateProfile}>Update Profile</Button>
       </ModalFooter>
 
     </Box>
-
   )
 }

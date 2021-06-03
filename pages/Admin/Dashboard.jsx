@@ -38,9 +38,9 @@ export default function Dashboard() {
   const username = 'elrazinjo@gmail.com'
 
   return (
-    <Flex bgColor='gray.50' h='100%' w='100%'>
+    <Flex bgColor='gray.50' h='100vh' w='100%'>
       <Head>
-        <title>Dashboard</title>
+        <title>Sta. Maria RBMS | Dashboard</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <Tabs orientation='vertical' size='sm' variant='unstyled'>
@@ -66,10 +66,10 @@ export default function Dashboard() {
             <Sidebar icon={<MdBusiness />} name='Business Establishments List' />
           </Tab>
           <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
-            <Sidebar icon={<RiNewspaperLine />} name='Certificates' />
+            <Sidebar icon={<RiNewspaperLine />} name='Provide Certificate' />
           </Tab>
           <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
-            <Sidebar icon={<HiOutlineClipboardList />} name='Transactions' />
+            <Sidebar icon={<HiOutlineClipboardList />} name='Requested Certificate' />
           </Tab>
           <Tab color='gray.200' px={1} py={2} my={2} borderRadius='md' _hover={{ bgColor: 'gray.700', }} _active={{ bgColor: 'gray.700', transform: 'scale(0.98)', }} _selected={{ bgColor: 'gray.700' }}>
             <Sidebar icon={<HiOutlineUserGroup />} name='Users' />
@@ -79,50 +79,50 @@ export default function Dashboard() {
           </Tab>
         </TabList>
 
-        <Center >
-          <Box h='100vh' w='calc(100vw - 300px)' p={4}>
-            <TopNavbar username={username} />
-            <TabPanels>
-              <TabPanel>
-                {/* DASHBOARD CONTENT */}
-                <DashboardContent />
-              </TabPanel>
 
-              <TabPanel>
-                {/* RESIDENTS LIST CONETNT */}
-                <ResidentsListContent />
-              </TabPanel>
-
-              <TabPanel>
-                {/* HOUSEHOLD LIST CONTENT */}
-                <HouseholdListContent />
-              </TabPanel>
-
-              <TabPanel>
-                {/* BUSINESS ESTABLISHMENT CONTENT */}
-                <BusinessEstListContent />
-              </TabPanel>
-
-              <TabPanel>
-                {/*  */}
-                <CertificateContent />
-              </TabPanel>
-
-              <TabPanel>
-                Sys Log
+        <Box w='calc(100vw - 300px)' p={4}>
+          <TopNavbar username={username} />
+          <TabPanels>
+            <TabPanel>
+              {/* DASHBOARD CONTENT */}
+              <DashboardContent />
             </TabPanel>
 
-              <TabPanel>
-                <UsersProfileCard />
-              </TabPanel>
-
-              <TabPanel>
-                Docu
+            <TabPanel>
+              {/* RESIDENTS LIST CONETNT */}
+              <ResidentsListContent />
             </TabPanel>
-            </TabPanels>
 
-          </Box>
-        </Center>
+            <TabPanel>
+              {/* HOUSEHOLD LIST CONTENT */}
+              <HouseholdListContent />
+            </TabPanel>
+
+            <TabPanel>
+              {/* BUSINESS ESTABLISHMENT CONTENT */}
+              <BusinessEstListContent />
+            </TabPanel>
+
+            <TabPanel>
+              {/*  */}
+              <CertificateContent />
+            </TabPanel>
+
+            <TabPanel>
+              Requested Certificate
+            </TabPanel>
+
+            <TabPanel>
+              <UsersProfileCard />
+            </TabPanel>
+
+            <TabPanel>
+              Docu
+            </TabPanel>
+          </TabPanels>
+
+        </Box>
+
       </Tabs>
 
     </Flex>
