@@ -26,11 +26,14 @@ import {
   HStack,
   CheckboxGroup,
   Checkbox,
+  InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react'
 
-import UsersProfileCard from '../../components/admin/UsersProfileCard'
+/* import UsersProfileCard from '../../components/admin/UsersProfileCard' */
 
 import { AiOutlineUserAdd } from 'react-icons/ai'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 export default function CertificateContent() {
   const [username, setUsername] = useState('')
@@ -40,6 +43,8 @@ export default function CertificateContent() {
   const [middleInitial, setMiddleInitial] = useState('')
   const [roles, setRoles] = useState([])
 
+  const passwordShow = () => setShow(!show)
+  const [show, setShow] = useState(false)
   const [users, setUsers] = useState([])
   const btnRef = React.useRef()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -51,6 +56,19 @@ export default function CertificateContent() {
     setLastName('')
     setMiddleInitial('')
     setRoles([])
+  }
+
+  async function removeUser(id) {
+    await fetch(`http://40.74.72.57/api/user/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+
+    alert('Removed Successfully')
+
+    window.location.reload(true)
   }
 
   async function addUser() {
@@ -119,6 +137,8 @@ export default function CertificateContent() {
             <Th>Name</Th>
             <Th>Username</Th>
             <Th>Role</Th>
+            <Th></Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -129,6 +149,7 @@ export default function CertificateContent() {
                   <Td>{row.name.firstName + ' ' + row.name.lastName}</Td>
                   <Td>{row.username}</Td>
                   <Td>{row.roles}</Td>
+                  <Td><Button colorScheme='red' size='sm' onClick={() => removeUser(row._id)} size='sm'>Delete</Button></Td>
                 </Tr>
               )
             })
@@ -175,11 +196,28 @@ export default function CertificateContent() {
 
                 <FormControl mt={2} isRequired Flex='1'>
                   <FormLabel>Password</FormLabel>
-                  <Input type='password' placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <InputGroup>
+                    <Input
+                      type={show ? 'text' : 'password'}
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <InputRightElement>
+                      <Box
+                        as="button"
+                        h="24px"
+                        w='24px'
+                        transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+                        onClick={passwordShow}>
+                        {show ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                      </Box>
+                    </InputRightElement>
+                  </InputGroup>
                 </FormControl>
 
                 <FormControl mt={2} isRequired Flex='1'>
-                <FormLabel>Roles</FormLabel>
+                  <FormLabel>Roles</FormLabel>
                   <CheckboxGroup>
                     <HStack>
                       <Checkbox onChange={(e) => setRoles('Admin')} pr={5}>Admin</Checkbox>

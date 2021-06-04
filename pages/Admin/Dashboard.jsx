@@ -28,6 +28,7 @@ import HouseholdListContent from './components/HouseholdListContent'
 import CertificateContent from './components/CertificateContent'
 import UsersProfileCard from './components/UsersContent'
 import RequestedCertificate from './components/RequestedCertificate'
+import PageEdit from './components/PageEditContent'
 
 // icon imports
 import { RiDashboardLine, RiNewspaperLine, RiPagesLine } from 'react-icons/ri'
@@ -120,7 +121,7 @@ export default function Dashboard() {
             </TabPanel>
 
             <TabPanel>
-              Docu
+              <PageEdit />
             </TabPanel>
           </TabPanels>
 

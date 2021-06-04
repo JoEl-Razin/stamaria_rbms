@@ -28,10 +28,10 @@ import { MdAdd } from 'react-icons/md'
 
 export default function RequestCertificatePage() {
   const [name, setName] = useState('')
-  const [certType, setCertType] = useState('')
+  const [type, setType] = useState('')
   const [address, setAddress] = useState('')
   const [purpose, setPurpose] = useState('')
-  const [gender, setGender] = useState('')
+  const [sex, setSex] = useState('')
   const [bName, setBName] = useState('')
   const [bAddress, setBAddress] = useState('')
   const [bType, setBType] = useState('')
@@ -41,7 +41,7 @@ export default function RequestCertificatePage() {
     setCertType('')
     setAddress('')
     setPurpose('')
-    setGender('')
+    setSex('')
     setBName('')
     setBAddress('')
     setBType('')
@@ -50,10 +50,10 @@ export default function RequestCertificatePage() {
   async function addCertificate() {
     const credentials = JSON.stringify({
       name,
-      certType,
+      type,
       address,
       purpose,
-      gender,
+      sex,
       bName,
       bAddress,
       bType,
@@ -71,7 +71,7 @@ export default function RequestCertificatePage() {
     setCertType('')
     setAddress('')
     setPurpose('')
-    setGender('')
+    setSex('')
     setBName('')
     setBAddress('')
     setBType('')
@@ -151,7 +151,7 @@ export default function RequestCertificatePage() {
 
             <FormControl mb={5}>
               <FormLabel>Select Gender</FormLabel>
-              <RadioGroup value={gender} onChange={setGender}>
+              <RadioGroup value={sex} onChange={setSex}>
                 <Stack direction='row'>
                   <Radio value='Male'>Male</Radio>
                   <Radio value='Female'>Female</Radio>
@@ -168,7 +168,7 @@ export default function RequestCertificatePage() {
             <Heading size='xs' mb={5}>Certificate Type</Heading>
             <FormControl mb={5}>
               <FormLabel>Select Clearance Type</FormLabel>
-              <RadioGroup value={certType} onChange={setCertType}>
+              <RadioGroup value={type} onChange={setType}>
                 <Stack direction='row'>
                   <Radio value='Barangay Clearance'>Barangay Clearance</Radio>
                   <Radio value='Business Clearance'>Business Clearance</Radio>
