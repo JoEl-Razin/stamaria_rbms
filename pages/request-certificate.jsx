@@ -59,7 +59,7 @@ export default function RequestCertificatePage() {
       bType,
     })
 
-    await fetch('http://localhost:8080/req-cert', {
+    await fetch('http://40.74.72.57/api/req-cert', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

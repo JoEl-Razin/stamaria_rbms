@@ -48,7 +48,7 @@ export default function BusinessEstListContent() {
   const [business, setBusiness] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:8080/business', {
+    fetch('http://40.74.72.57/api/business', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ export default function BusinessEstListContent() {
       }
     })
   
-    await fetch('http://localhost:8080/business', {
+    await fetch('http://40.74.72.57/api/business', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

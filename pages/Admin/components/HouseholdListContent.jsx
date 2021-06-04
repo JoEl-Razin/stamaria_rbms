@@ -46,7 +46,7 @@ export default function HouseholdListContent() {
   const [households, setHouseholds] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:8080/household', {
+    fetch('http://40.74.72.57/api/household', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export default function HouseholdListContent() {
       householdMembers,
     })
 
-    const response = await fetch('http://localhost:8080/household', {
+    const response = await fetch('http://40.74.72.57/api/household', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

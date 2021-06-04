@@ -53,7 +53,7 @@ export default function DashboardContent() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
-    fetch('http://localhost:8080/resident', {
+    fetch('http://40.74.72.57/api/resident', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

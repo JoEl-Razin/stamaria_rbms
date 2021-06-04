@@ -65,7 +65,7 @@ export default function MoreOptionRes({
   }
 
   async function deleteData(url, id) {
-    await fetch(`http://localhost:8080/${url}/${id}`, {
+    await fetch(`http://40.74.72.57/api/${url}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ export default function MoreOptionRes({
         address
       }
     })
-    await fetch(`http://localhost:8080/business/${id}`, {
+    await fetch(`http://40.74.72.57/api/business/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'

@@ -25,7 +25,7 @@ export default function AdminLogin() {
 
     const credentials = JSON.stringify({ username, password })
 
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch('http://40.74.72.57/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

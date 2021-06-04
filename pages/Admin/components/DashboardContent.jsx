@@ -12,7 +12,7 @@ export default function DashboardContent() {
 
 
   useEffect(() => {
-    fetch('http://localhost:8080/resident', {
+    fetch('http://40.74.72.57/api/resident', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ export default function DashboardContent() {
           setResidents(result)
         })
 
-    fetch('http://localhost:8080/household', {
+    fetch('http://40.74.72.57/api/household', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ export default function DashboardContent() {
           sethousehold(result)
         })
 
-    fetch('http://localhost:8080/business', {
+    fetch('http://40.74.72.57/api/business', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
