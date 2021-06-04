@@ -38,7 +38,7 @@ export default function RequestCertificatePage() {
 
   function clearFields() {
     setName('')
-    setCertType('')
+    setType('')
     setAddress('')
     setPurpose('')
     setSex('')
@@ -68,7 +68,7 @@ export default function RequestCertificatePage() {
     }).then((res) => res.json())
 
     setName('')
-    setCertType('')
+    setType('')
     setAddress('')
     setPurpose('')
     setSex('')
@@ -79,11 +79,11 @@ export default function RequestCertificatePage() {
     alert('Added Successfully')
   }
 
-  var type
+  var typeOutput
 
-  switch (certType) {
+  switch (type) {
     case 'Barangay Clearance':
-      type = <FormControl mb={2}>
+      typeOutput = <FormControl mb={2}>
         <FormLabel>Purpose</FormLabel>
         <RadioGroup value={purpose} onChange={setPurpose}>
           <Stack direction='column'>
@@ -98,7 +98,7 @@ export default function RequestCertificatePage() {
       </FormControl>
       break;
     case 'Business Clearance':
-      type = <Box>
+      typeOutput = <Box>
         <FormControl mb={2}>
           <FormLabel>Business Name</FormLabel>
           <Input type='text' placeholder='Business Name' value={bName} onChange={(e) => setBName(e.target.value)} />
@@ -179,7 +179,7 @@ export default function RequestCertificatePage() {
                 </Stack>
               </RadioGroup>
             </FormControl>
-            {type}
+            {typeOutput}
           </Box>
         </Flex>
 
