@@ -36,7 +36,7 @@ import { BsFillPersonLinesFill } from 'react-icons/bs'
 
 export default function Dashboard() {
 
-  const username = localStorage.getItem('username')
+  // const username = localStorage.getItem('username')
   // const username = 'elrazinjo@gmail.com'
 
   return (
