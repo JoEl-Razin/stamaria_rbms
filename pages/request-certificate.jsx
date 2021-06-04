@@ -158,8 +158,10 @@ export default function RequestCertificatePage() {
                 </Stack>
               </RadioGroup>
             </FormControl>
+
             <Button colorScheme='blue' mr={5} onClick={clearFields}>Clear</Button>
             <Button colorScheme='green' onClick={addCertificate}>Submit</Button>
+            
           </Box>
 
           <Box>

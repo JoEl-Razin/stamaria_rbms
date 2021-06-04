@@ -2,7 +2,7 @@ import { Heading, Flex, Spacer, Box, Menu, MenuButton, MenuList, MenuItem, Butto
 
 export default function TopNavbar({username}) {
   return (
-    <Flex pos='sticky' top='0px'>
+    <Flex pos='sticky' top='0px' zIndex='1'>
       <Box d='flex' alignItems='center'>
         <Heading size='md'>
           Residence and Business Management System
@@ -17,7 +17,6 @@ export default function TopNavbar({username}) {
             {username}
           </MenuButton>
           <MenuList>
-            <MenuItem>Profile</MenuItem>
             <MenuItem>Logout</MenuItem>
           </MenuList>
         </Menu>

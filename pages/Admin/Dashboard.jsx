@@ -27,6 +27,7 @@ import ResidentsListContent from './components/ResidentsListContent'
 import HouseholdListContent from './components/HouseholdListContent'
 import CertificateContent from './components/CertificateContent'
 import UsersProfileCard from './components/UsersContent'
+import RequestedCertificate from './components/RequestedCertificate'
 
 // icon imports
 import { RiDashboardLine, RiNewspaperLine, RiPagesLine } from 'react-icons/ri'
@@ -111,7 +112,7 @@ export default function Dashboard() {
             </TabPanel>
 
             <TabPanel>
-              Requested Certificate
+              <RequestedCertificate />
             </TabPanel>
 
             <TabPanel>
