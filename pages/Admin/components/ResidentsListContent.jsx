@@ -57,20 +57,6 @@ export default function DashboardContent() {
 
   var [residents, setResidents] = useState([])
 
-  useEffect(() => {
-    fetch('http://localhost:8080/resident', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }).then(res => res.json())
-      .then(
-        (result) => {
-          setResidents(result)
-        }
-      )
-  }, [])
-
   function clearFields() {
     setFirstName('')
     setMiddleInitial('')
@@ -118,7 +104,7 @@ export default function DashboardContent() {
       }
     })
 
-    const response = await fetch('http://localhost:8080/resident', {
+    await fetch('http://localhost:8080/resident', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -126,7 +112,26 @@ export default function DashboardContent() {
       body: credentials,
     }).then((res) => res.json())
 
+    onClose()
+
+    alert('Added Successfully!')
+
+    window.location.reload(true)
   }
+
+  useEffect(() => {
+    fetch('http://localhost:8080/resident', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          setResidents(result)
+        }
+      )
+  }, [])
 
   let type;
   if (residentType == 'Voter') {

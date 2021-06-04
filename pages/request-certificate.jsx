@@ -36,6 +36,48 @@ export default function RequestCertificatePage() {
   const [bAddress, setBAddress] = useState('')
   const [bType, setBType] = useState('')
 
+  function clearFields() {
+    setName('')
+    setCertType('')
+    setAddress('')
+    setPurpose('')
+    setGender('')
+    setBName('')
+    setBAddress('')
+    setBType('')
+  }
+
+  async function addCertificate() {
+    const credentials = JSON.stringify({
+      name,
+      certType,
+      address,
+      purpose,
+      gender,
+      bName,
+      bAddress,
+      bType,
+    })
+
+    await fetch('http://localhost:8080/req-cert', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: credentials,
+    }).then((res) => res.json())
+
+    setName('')
+    setCertType('')
+    setAddress('')
+    setPurpose('')
+    setGender('')
+    setBName('')
+    setBAddress('')
+    setBType('')
+
+    alert('Added Successfully')
+  }
 
   var type
 
@@ -43,14 +85,16 @@ export default function RequestCertificatePage() {
     case 'Barangay Clearance':
       type = <FormControl mb={2}>
         <FormLabel>Purpose</FormLabel>
-        <Select placeholder='Select purpose' value={purpose} onChance={setPurpose}>
-          <option value='Police Clearance'>Police Clearance</option>
-          <option value='NBI Clearance'>NBI Clearance</option>
-          <option value='BIR(TIN)'>BIR(TIN)</option>
-          <option value='Employment'>Employment</option>
-          <option value='School Requirement'>School Requirement</option>
-          <option value='Other'>Other</option>
-        </Select>
+        <RadioGroup value={purpose} onChange={setPurpose}>
+          <Stack direction='column'>
+            <Radio value='Police Clearance'>Police Clearance</Radio>
+            <Radio value='NBI Clearance'>NBI Clearance</Radio>
+            <Radio value='BIR(TIN)'>BIR(TIN)</Radio>
+            <Radio value='Employment'>Employment</Radio>
+            <Radio value='School Requirement'>School Requirement</Radio>
+            <Radio value='Other'>Other</Radio>
+          </Stack>
+        </RadioGroup>
       </FormControl>
       break;
     case 'Business Clearance':
@@ -97,7 +141,7 @@ export default function RequestCertificatePage() {
             <Heading size='xs' mb={5}>Personal Information</Heading>
             <FormControl mb={5}>
               <FormLabel>Name</FormLabel>
-              <Input type='text' placeholder='Name' value={name} onChange={(e) => setFirstName(e.target.value)} />
+              <Input type='text' placeholder='Name' value={name} onChange={(e) => setName(e.target.value)} />
             </FormControl>
 
             <FormControl mb={5}>
@@ -114,7 +158,8 @@ export default function RequestCertificatePage() {
                 </Stack>
               </RadioGroup>
             </FormControl>
-            <Button colorScheme='green'>Submit</Button>
+            <Button colorScheme='blue' mr={5} onClick={clearFields}>Clear</Button>
+            <Button colorScheme='green' onClick={addCertificate}>Submit</Button>
           </Box>
 
           <Box>

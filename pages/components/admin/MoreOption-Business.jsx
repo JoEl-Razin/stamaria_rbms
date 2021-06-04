@@ -88,10 +88,16 @@ export default function MoreOptionRes({
     await fetch(`http://localhost:8080/business/${id}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'applicaiton/json'
+        'Content-Type': 'application/json'
       },
       body: profile,
     })
+
+    onClose()
+
+    alert('Updated Successfully!')
+
+    window.location.reload(true)
   }
 
   return (

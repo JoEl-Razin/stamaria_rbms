@@ -84,6 +84,12 @@ export default function HouseholdListContent() {
       },
       body: credentials,
     }).then((res) => res.json())
+
+    onClose()
+
+    alert('Added Successfully!')
+
+    window.location.reload(true)
   }
 
   let type;

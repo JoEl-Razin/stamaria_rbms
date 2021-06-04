@@ -28,7 +28,7 @@ import {
 import MoreOptionRes from '../../components/admin/MoreOption-Business'
 /* import AddBusiness from '../../components/admin/AddBusiness' */
 
-import addProfile from '../../api/admin/addBusiness'
+/* import addProfile from '../../api/admin/addBusiness' */
 
 import { AiOutlinePrinter } from 'react-icons/ai'
 import { MdAdd } from 'react-icons/md'
@@ -60,6 +60,34 @@ export default function BusinessEstListContent() {
         }
       )
   }, [])
+
+  async function addProfile() {
+    const credentials = JSON.stringify({
+      businessName,
+      businessAddress,
+      businessType,
+      businessPermit,
+      owner: {
+        name,
+        contactNo,
+        address,
+      }
+    })
+  
+    await fetch('http://localhost:8080/business', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: credentials,
+    }).then((res) => res.json())
+
+    onClose()
+
+    alert('Added Successfully!')
+
+    window.location.reload(true)
+  }
 
   function clearFields() {
     setBusinessName('')
@@ -190,7 +218,7 @@ export default function BusinessEstListContent() {
           </ModalBody>
           <ModalFooter>
             <Button mx={2} colorScheme='green' onClick={clearFields}>Clear Fields</Button>
-            <Button mx={2} colorScheme='blue' onClick={addProfile({ businessName, businessAddress, businessType, businessPermit, name, contactNo, address })}>Save</Button>
+            <Button mx={2} colorScheme='blue' onClick={addProfile}>Save</Button>
           </ModalFooter>
 
           {/* <AddBusiness /> */}

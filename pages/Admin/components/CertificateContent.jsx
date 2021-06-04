@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Heading,
   Box,
@@ -18,6 +18,21 @@ import {
   BoxShadow,
   Center,
   InputElementRight,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
 } from '@chakra-ui/react'
 
 import { HiSearch } from 'react-icons/hi'
@@ -32,6 +47,24 @@ export default function DashboardContent() {
   const [bName, setBName] = useState('')
   const [bAddress, setBAddress] = useState('')
   const [bType, setBType] = useState('')
+
+  const [residents, setResidents] = useState([])
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  useEffect(() => {
+    fetch('http://localhost:8080/resident', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          setResidents(result)
+        }
+      )
+  }, [])
 
   var type
 
@@ -91,7 +124,7 @@ export default function DashboardContent() {
                   transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
                   h='24px'
                   w='24px'
-                  onClick={() => alert('show modal')}
+                  onClick={onOpen}
                   pl='3px'
                   borderRadius='5px'
                 >
@@ -140,6 +173,49 @@ export default function DashboardContent() {
         <Divider orientation='vertical' m={2} h='50vh' />
 
       </Flex>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Select Profile</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Table variant='simple' size='sm'>
+              <Thead>
+                <Tr>
+                  <Th>Name</Th>
+                  <Th>Address</Th>
+                  <Th></Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {
+                  residents.map((row) => {
+                    return (
+                      <Tr key={row._id}>
+                        <Td>{row.name.firstName + ' ' + row.name.lastName}</Td>
+                        <Td>{row.address.householdNo + ' ' + row.address.streetName}</Td>
+                        <Td><Button size='sm' onClick={
+                          () => { 
+                            setName(row.name.firstName + ' ' + row.name.lastName)
+                            setAddress(row.address.householdNo + ' ' + row.address.streetName)
+                            setGender(row.sex)
+                            onClose()
+                          }
+                        }>Select</Button></Td>
+                      </Tr>
+                    )
+                  })
+                }
+              </Tbody>
+            </Table>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+
+      </Modal>
     </Box>
   )
 }
