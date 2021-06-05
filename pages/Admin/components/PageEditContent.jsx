@@ -26,7 +26,7 @@ export default function PageEdit() {
     const about = JSON.stringify({
       about,
     })
-    await fetch(`http://40.74.72.57/api/home-about/${id}`, {
+    await fetch(`http://40.74.72.57/api/home-about`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -58,15 +58,15 @@ export default function PageEdit() {
 
       <Divider my={3} />
 
-      <Box>
+      {/* <Box>
         <Heading size='sm'>About Page</Heading>
 
         <FormControl mt={2} mr={5} flex='1'>
-          <Textarea value={about} onChange={(e) => setAbout(e.target.value)} />
+          <Textarea value={about.about} onChange={(e) => setAbout(e.target.value)} />
         </FormControl>
         <Button colorScheme='green' size='sm' my={5} onClick={() => updateAbout(about._id)}>Update About</Button>
       </Box>
-
+ */}
       <Divider my={3} />
 
       <Box>
@@ -89,3 +89,5 @@ export default function PageEdit() {
     </Box>
   )
 }
+
+/* Barangay Santa Maria is one of the busies barangay within the city. The barangay has different kinds of businesses, offices and religious places, and the barangay can be located within the center of urban area of the Zamboanga City */

@@ -97,7 +97,7 @@ export default function Home() {
               <Divider py={5} />
               <Box px={[150], [25]}>
                 <Text>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque dicta quaerat, necessitatibus numquam consectetur adipisci assumenda nulla unde excepturi accusantium!
+                Barangay Santa Maria is one of the busies barangay within the city. The barangay has different kinds of businesses, offices and religious places, and the barangay can be located within the center of urban area of the Zamboanga City 
                 </Text>
               </Box>
             </Box>

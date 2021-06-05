@@ -121,7 +121,7 @@ export default function Dashboard() {
             </TabPanel>
 
             <TabPanel>
-              <PageEdit />
+              {/* <PageEdit /> */}
             </TabPanel>
           </TabPanels>
 
